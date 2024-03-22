@@ -20,15 +20,7 @@ export default function Top() {
       setError(error.message);
     }
   };
-  useEffect(() => {
-    // ユーザーの認証状態をチェック
-    const session = supabase.auth.onAuthStateChange;
 
-    // セッションがなければ、またはセッション内のユーザー情報がなければログインページにリダイレクト
-    if (!session || !session.user) {
-      router.push('/login'); // ログインページに適宜変更してください
-    }
-  }, [router]);
   return (
     <>
       <div className="container">

@@ -1,7 +1,7 @@
 "use client";
 import Head from "next/head";
 import { supabase } from "@/utils/supabase.client";
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
   const [error, setError] = useState(""); // エラーメッセージ用の状態
-  const onLogin = async (e) => {
+  const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       // パスワードとパスワード確認が一致するかチェック
@@ -19,13 +19,15 @@ export default function Login() {
         setError("パスワードが一致しません。");
         return;
       }
-   
-      const { data, error } = await supabase.auth.signInWithPassword({
+
+      const { data: dataUser, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
-      if (data) console.log(data);
-      // await router.push("/top");
+      if (dataUser) {
+        console.log(dataUser);
+        router.refresh();
+      }
     } catch (error: any) {
       console.log(error.message);
       setError(error.message);
@@ -76,7 +78,7 @@ export default function Login() {
               <br />
               <Link href="/signup">ユーザー登録がお済みでない方はこちらから</Link>
               <br />
-              <Link href="/sendemail">パスワードをお忘れの方はこちらから</Link>
+              <Link href="/sendResetPassword">パスワードをお忘れの方はこちらから</Link>
             </div>
           </form>
           {error && <p>{error}</p>}

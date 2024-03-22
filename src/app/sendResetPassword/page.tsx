@@ -2,23 +2,36 @@
 import Head from "next/head";
 import { supabase } from "@/utils/supabase.client";
 import { useState } from "react";
-
-export default function Sendemail() {
+import React from "react";
+export default function SendResetPassword() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const onSubmit = async (e) => {
+  const [success, setSuccess] = useState(false);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "'http://localhost:3000/passwordReset/'",
-      });
-      if (error) {
-        setError("passswordがリセットできませんでした。");
-        throw Error;
+    let attempt = 0;
+    const maxAttempts = 3;
+    const retryDelay = 2000; // ミリ秒
+
+    const sendRequest = async () => {
+      try {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}resetPassword`,
+        });
+        setSuccess(true);
+      } catch (error: any) {
+        if (error.status === 429 && attempt < maxAttempts) {
+          setTimeout(() => {
+            attempt++;
+            sendRequest();
+          }, retryDelay);
+        } else {
+          setError(error.message);
+        }
       }
-    } catch (error: any) {
-      setError(error.message);
-    }
+    };
+
+    sendRequest();
   };
   return (
     <>
@@ -44,6 +57,7 @@ export default function Sendemail() {
               </div>
             </form>
             {error && <p>{error}</p>}
+            {success && <p>success!!</p>}
           </div>
         </main>
       </div>

@@ -1,43 +1,76 @@
 "use client";
-import Head from "next/head";
 import { supabase } from "@/utils/supabase.client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState(""); // エラーメッセージ用の状態
   const router = useRouter();
-  const onSubmit = async (e) => {
-    e.preventDefault(); // フォームのデフォルトの送信を防ぐ
+  // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault(); // フォームのデフォルトの送信を防ぐ
+  //   // パスワードとパスワード確認が一致するかチェック
+  //   if (password !== passwordConf) {
+  //     setError("パスワードが一致しません。");
+  //     return;
+  //   }
+  //   // Supabaseを使用してログイン
+  //   const { data, error } = await supabase.auth.signUp({
+  //     email,
+  //     password,
+  //   });
+  //   if (data) console.log(data);
+  //   if (error) {
+  //     setError(error.message);
+  //     return;
+  //   }
+  //   await router.push("/top");
+  // };
 
-    // パスワードとパスワード確認が一致するかチェック
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault(); // デフォルトのフォーム送信を防ぐ
     if (password !== passwordConf) {
       setError("パスワードが一致しません。");
       return;
     }
-
-    // Supabaseを使用してログイン
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    if (data) console.log(data);
-    // エラーがあれば状態にセット
-    if (error) {
-      setError(error.message);
-      return;
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (!error && data) {
+      const response = await fetch("http://localhost:3000/api/saveUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, username }),
+      });
+      if (!response.ok) {
+        window.alert("ユーザー登録に失敗しました");
+        console.log(error);
+      } else {
+        console.error("サインアップに失敗しました", error);
+      }
+      // router.push("/top");
     }
-    await router.push("/12top");
   };
 
   return (
     <>
       <div className="container">
         <div className="grid">
-          <form onSubmit={onSubmit}>
+          <form onSubmit={(e) => handleSignUp(e)}>
+            <div>
+              <label htmlFor="username">username</label>
+              <input
+                className="text-black"
+                id="username"
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
             <div>
               <label htmlFor="email">address</label>
               <input

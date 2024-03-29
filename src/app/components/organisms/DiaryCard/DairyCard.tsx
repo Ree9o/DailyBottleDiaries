@@ -1,5 +1,8 @@
 "use client";
 import React from "react";
+import Button from "../../atoms/Button/Button";
+import deleteDiary from "@/src/app/services/deleteDiary";
+import { useRouter } from "next/navigation";
 
 interface DiaryCardProps {
   diaryData: {
@@ -15,12 +18,23 @@ interface DiaryCardProps {
 }
 
 export default function DiaryCard({ diaryData, name }: DiaryCardProps) {
+  const router = useRouter();
   const formattedDate = diaryData.createdAt.toLocaleDateString("ja-JP", {
     year: "numeric",
     month: "long",
     day: "numeric",
     weekday: "long",
   });
+
+  const handleDelete = (id: number) => {
+    try {
+      deleteDiary(id);
+      router.push("/");
+    } catch (error) {
+      window.alert("削除できませんでした");
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -32,6 +46,9 @@ export default function DiaryCard({ diaryData, name }: DiaryCardProps) {
         <div className="flex w-auto gap-5 text-xs row-start-3 row-end-4">
           <div>{formattedDate}</div> <div>{name}</div>
         </div>
+        <Button type="submit" onClick={() => handleDelete(diaryData.id)}>
+          削除
+        </Button>
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import getDiaries from "../../services/getDialies";
-import DiaryCard from "../../_components/organisms/DiaryCard";
+import DiaryCard from "../../components/organisms/DiaryCard/DairyCard";
 import { notFound } from "next/navigation";
 
 interface DiaryPageProps {

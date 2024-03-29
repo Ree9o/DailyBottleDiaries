@@ -1,4 +1,4 @@
-import DiariesContainer from "./_components/template/DiariesContainer";
+import DiariesContainer from "./components/template/DiariesContainer";
 import { getServerSession } from "./api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 

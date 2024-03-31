@@ -1,26 +1,25 @@
 import React from "react";
-import RouterButton from "../../atoms/RouterButton/RouterButton";
 import AuthButton from "../../atoms/AuthButton/AuthButton";
 import { getServerSession } from "@/src/app/api/auth/[...nextauth]/route";
+import LinkButton from "../../atoms/LinkButton/LinkButton";
 
 export default async function PageAside() {
   const session = await getServerSession();
-
   return (
     <>
       <aside className=" bg-amber-100 ">
         <nav className="flex flex-col gap-5 items-center pt-5">
           <div id="top">
-            <RouterButton url="/">トップ</RouterButton>
+            <LinkButton path="/">トップ</LinkButton>
           </div>
           {session && session.user ? (
             <>
               <div>
-                <RouterButton url="/diary/create">作成</RouterButton>
+                <LinkButton path="/diary/create">作成</LinkButton>
               </div>
 
               <div>
-                <RouterButton url="/mypage">マイページ</RouterButton>
+                <LinkButton path="/mypage">マイページ</LinkButton>
               </div>
               <AuthButton session={session} />
             </>

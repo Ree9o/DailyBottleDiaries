@@ -1,16 +1,12 @@
 import DiariesContainer from "./components/template/DiariesContainer";
-import { getServerSession } from "./api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
-
+import PageAside from "./components/molecules/PageAside/PageAside";
 export default async function Page() {
-  const session = await getServerSession();
-  if (!session) {
-    redirect("/login");
-  }
-
   return (
     <>
-      <DiariesContainer />
+      <div className=" grid grid-cols-[0.1fr_1fr] grid-rows-1">
+        <PageAside />
+        <DiariesContainer />
+      </div>
     </>
   );
 }

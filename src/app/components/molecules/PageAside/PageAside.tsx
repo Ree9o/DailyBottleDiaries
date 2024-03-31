@@ -7,7 +7,7 @@ export default async function PageAside() {
   const session = await getServerSession();
   return (
     <>
-      <aside className=" bg-amber-100 ">
+      <aside className=" bg-amber-100 h-screen">
         <nav className="flex flex-col gap-5 items-center pt-5">
           <div id="top">
             <LinkButton path="/">トップ</LinkButton>

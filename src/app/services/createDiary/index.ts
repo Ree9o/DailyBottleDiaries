@@ -11,7 +11,6 @@ interface CreateDiaryProps {
 export default async function createDiary({ userId, title, content, isPublic }: CreateDiaryProps) {
   const diaries = await prisma.diary.create({
     data: {
-
       title: title,
       content: content,
       isPublic: isPublic,

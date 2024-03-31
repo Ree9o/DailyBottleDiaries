@@ -15,9 +15,10 @@ interface DiaryCardProps {
     updatedAt: Date;
   };
   name: string | null;
+  isCreateUser: boolean;
 }
 
-export default function DiaryCard({ diaryData, name }: DiaryCardProps) {
+export default function DiaryCard({ diaryData, name, isCreateUser }: DiaryCardProps) {
   const router = useRouter();
   const formattedDate = diaryData.createdAt.toLocaleDateString("ja-JP", {
     year: "numeric",
@@ -38,18 +39,20 @@ export default function DiaryCard({ diaryData, name }: DiaryCardProps) {
 
   return (
     <>
-      <div className="letter w-4/6 h-96 m-auto grid grid-cols-1 grid-rows-\[auto\_1fr\_auto\] gap-2">
-        <h1 className="text-2xl row-start-1 row-end-2">{diaryData.title}</h1>
+      <article className="letter w-4/6 h-96 m-auto grid grid-cols-1 grid-rows-\[auto\_1fr\_auto\] gap-2">
+        <h2 className="text-2xl row-start-1 row-end-2">{diaryData.title}</h2>
         <div className="row-start-2 row-end-3 overflow-y-auto scrollbar-hidden">
-          <div>{diaryData.content}</div>
+          {diaryData.content}
         </div>
-        <div className="flex w-auto gap-5 text-xs row-start-3 row-end-4">
-          <div>{formattedDate}</div> <div>{name}</div>
-        </div>
-        <Button type="submit" onClick={() => handleDelete(diaryData.id)}>
-          削除
-        </Button>
-      </div>
+        <footer className="flex w-auto gap-5 text-xs row-start-3 row-end-4">
+          <time>{formattedDate}</time> <div>{name}</div>
+        </footer>
+        {isCreateUser && (
+          <Button type="submit" onClick={() => handleDelete(diaryData.id)}>
+            削除
+          </Button>
+        )}
+      </article>
     </>
   );
 }

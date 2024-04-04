@@ -1,13 +1,13 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { StoryFn, Meta} from "@storybook/react";
 import LabeledInput from "./LabeledInput";
 
 export default {
   title: "Molecules/LabeledInput",
   component: LabeledInput,
-} as ComponentMeta<typeof LabeledInput>;
+} as Meta<typeof LabeledInput>;
 
-const Template: ComponentStory<typeof LabeledInput> = (args) => (
+const Template: StoryFn<typeof LabeledInput> = (args) => (
   <LabeledInput {...args} />
 );
 

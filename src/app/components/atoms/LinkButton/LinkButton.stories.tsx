@@ -1,13 +1,13 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 import RouterButton from "./LinkButton";
 
 export default {
   title: "Components/RouterButton",
   component: RouterButton,
-} as ComponentMeta<typeof RouterButton>;
+} as Meta<typeof RouterButton>;
 
-const Template: ComponentStory<typeof RouterButton> = (args) => <RouterButton {...args} />;
+const Template: StoryFn<typeof RouterButton> = (args) => <RouterButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

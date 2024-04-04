@@ -1,32 +1,44 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Button from './Button';
+// Button.stories.tsx
+import type { Meta, StoryObj } from "@storybook/react";
+import Button from "./Button";
 
-export default {
-  title: 'Components/Button',
+const meta: Meta<typeof Button> = {
+  title: "Atoms/Button",
   component: Button,
-} as ComponentMeta<typeof Button>;
-
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
-
-export const Primary = Template.bind({});
-Primary.args = {
-  children: 'Primary Button',
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  children: 'Secondary Button',
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+
+export const Primary: Story = {
+  render: () => <Button>Primary Button</Button>,
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  children: 'Large Button',
-  className: 'py-4 px-6 text-xl',
+export const Secondary: Story = {
+  render: () => <Button className="bg-gray-500 hover:bg-gray-600">Secondary Button</Button>,
 };
 
-export const Small = Template.bind({});
-Small.args = {
-  children: 'Small Button',
-  className: 'py-1 px-2 text-sm',
+export const Large: Story = {
+  render: () => <Button className="py-4 px-8 text-xl">Large Button</Button>,
+};
+
+export const Small: Story = {
+  render: () => <Button className="py-1 px-2 text-sm">Small Button</Button>,
+};
+
+export const CustomClick: Story = {
+  render: () => (
+    <Button
+      onClick={() => {
+        alert("Button clicked!");
+      }}
+    >
+      Custom Click
+    </Button>
+  ),
+};
+
+export const SubmitButton: Story = {
+  render: () => <Button type="submit">Submit Button</Button>,
 };

@@ -6,7 +6,7 @@ import { prismaInitalied as prisma } from "@/src/lib/PrismaInitialized";
 import { getServerSession as originalGetServerSession } from "next-auth";
 import { cache } from "react";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
@@ -45,9 +45,11 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
+
 export const getServerSession = cache(async () => {
   return originalGetServerSession(authOptions);
 });
+
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

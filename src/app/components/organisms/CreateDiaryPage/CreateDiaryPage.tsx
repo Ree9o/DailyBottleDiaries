@@ -11,10 +11,8 @@ export default function CreateDiaryPage({ userid }: { userid: string }) {
   const [content, setContent] = useState("");
   const [isCheck, setIsCheck] = useState(false);
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
-      console.log(userid);
       await createDiary({ userId: userid, title, content, isPublic: isCheck });
       router.push("/");
     } catch (error) {
@@ -24,7 +22,7 @@ export default function CreateDiaryPage({ userid }: { userid: string }) {
   };
   return (
     <>
-      <form onSubmit={handleSubmit} className="letter size-9/12 ">
+      <form action={handleSubmit} className="letter size-9/12 ">
         <LabeledInput
           id="title"
           label="タイトル"

@@ -3,7 +3,6 @@ import getDiaries from "../../services/getDialies";
 import DiaryCard from "../../components/organisms/DiaryCard/DairyCard";
 import { notFound } from "next/navigation";
 import { getServerSession } from "../../api/auth/[...nextauth]/route";
-
 interface DiaryPageProps {
   params: {
     id: string;

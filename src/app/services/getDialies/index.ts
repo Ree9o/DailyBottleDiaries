@@ -1,18 +1,23 @@
-import React from "react";
+"use server";
 import { prismaInitalied as prisma } from "@/src/lib/PrismaInitialized";
 
 export default async function getDiaries() {
-  const diaries = await prisma.diary.findMany({
-    include: {
-      user: {
-        select: {
-          name: true,
+  try {
+    const diaries = await prisma.diary.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
         },
       },
-    },
-    where: {
-      isPublic: true,
-    },
-  });
-  return diaries;
+      where: {
+        isPublic: true,
+      },
+    });
+    return diaries;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }

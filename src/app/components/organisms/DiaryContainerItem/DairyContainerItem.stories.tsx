@@ -1,13 +1,19 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { StoryFn,Meta } from "@storybook/react";
 import DiaryGrids from "./DairyContainerItem";
 
 export default {
   title: "Components/DiaryGrids",
   component: DiaryGrids,
-} as ComponentMeta<typeof DiaryGrids>;
+  parameters: {
+    layout: 'centered',
+    nextjs: {
+    appDirectory: true,
+  },
+  },
+} as Meta<typeof DiaryGrids>;
 
-const Template: ComponentStory<typeof DiaryGrids> = (args) => <DiaryGrids {...args} />;
+const Template: StoryFn<typeof DiaryGrids> = (args) => <DiaryGrids {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

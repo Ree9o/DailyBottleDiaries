@@ -26,11 +26,11 @@ export default function ProfileDiariesList({ diary }: Props) {
   return (
     <>
       <button
-        className="size-60"
+        className="size-60 p-3"
         type="button"
         onClick={() => router.push(`mypage/${id}`)}
       >
-        <h1>{diary.title}</h1>
+        <h2 className="overflow-hidden text-ellipsis">{diary.title}</h2>
         <div>{formattedDate}</div>
       </button>
     </>

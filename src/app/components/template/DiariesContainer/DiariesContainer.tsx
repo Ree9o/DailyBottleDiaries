@@ -1,6 +1,6 @@
 import getDiaries from "@/src/app/services/getDialies";
 import React from "react";
-import DiaryContaienerItem from "../../organisms/DiaryContainerItem/DairyContainerItem";
+import DiaryContaienerItem from "../../organisms/DiaryContainerItem/DiaryContainerItem";
 
 export default async function DiariesContainer() {
   const diaries = await getDiaries();

@@ -2,7 +2,7 @@ import React from "react";
 import getUserDiaries from "../../services/getUserDiaries";
 import { getServerSession } from "@/src/lib/auth";
 import { notFound } from "next/navigation";
-import DiaryCard from "../../components/organisms/DiaryCard/DairyCard";
+import DiaryCard from "../../components/organisms/DiaryCard/DiaryCard";
 
 interface Props {
   params: {

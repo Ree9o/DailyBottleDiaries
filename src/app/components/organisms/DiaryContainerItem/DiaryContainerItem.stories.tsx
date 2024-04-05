@@ -1,6 +1,6 @@
 import React from "react";
 import { StoryFn,Meta } from "@storybook/react";
-import DiaryGrids from "./DairyContainerItem";
+import DiaryGrids from "./DiaryContainerItem";
 
 export default {
   title: "Components/DiaryGrids",

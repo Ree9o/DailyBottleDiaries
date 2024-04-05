@@ -19,6 +19,9 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async redirect() {
+      return "/";
+    },
     async jwt({ token, user }) {
       const dbUser = await prisma.user.findFirst({
         where: { email: token.email as string },
@@ -35,7 +38,7 @@ export const authOptions: NextAuthOptions = {
         email: dbUser.email,
       };
     },
-    async session({ session, token }: any) {
+    async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.name = token.name as string;
@@ -49,5 +52,3 @@ export const authOptions: NextAuthOptions = {
 export const getServerSession = cache(async () => {
   return originalGetServerSession(authOptions);
 });
-
-

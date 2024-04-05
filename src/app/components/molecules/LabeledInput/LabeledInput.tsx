@@ -6,7 +6,9 @@ interface LabeledInputProps {
   type?: string;
   value: string;
   onChange: (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
   required?: boolean;
 }
@@ -21,13 +23,13 @@ export default function LabeledInput({
 }: LabeledInputProps) {
   return (
     <div className="mb-4">
-      <label htmlFor={id} className="block mb-2 font-bold">
+      <label htmlFor={id} className="mb-2 block font-bold">
         {label}
       </label>
       {id === "content" && type === "text" ? (
         <textarea
           id={id}
-          className="w-full px-3 py-2 border rounded-md h-40"
+          className="h-40 w-full rounded-md border px-3 py-2"
           value={value}
           onChange={onChange}
           required={required}
@@ -36,10 +38,11 @@ export default function LabeledInput({
         <input
           type={type}
           id={id}
-          className="w-full px-3 py-2 border rounded-md "
+          className="w-full rounded-md border px-3 py-2 "
           value={value}
           onChange={onChange}
           required={required}
+          maxLength={30}
         />
       )}
     </div>

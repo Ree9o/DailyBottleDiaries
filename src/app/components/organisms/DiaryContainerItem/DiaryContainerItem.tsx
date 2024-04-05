@@ -1,5 +1,5 @@
 "use client";
-import React, { Children, useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 
 interface DiaryGridsProps {
@@ -13,7 +13,7 @@ interface DiaryGridsProps {
     updatedAt: Date;
   };
 }
-export default function DiaryGrids({ diary }: DiaryGridsProps) {
+export default function DiaryContaienerItem({ diary }: DiaryGridsProps) {
   const router = useRouter();
   const id = String(diary.id);
   const formattedDate = diary.createdAt.toLocaleDateString("ja-JP", {
@@ -24,12 +24,14 @@ export default function DiaryGrids({ diary }: DiaryGridsProps) {
   });
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 py-8 bg-white rounded-lg shadow-md p-6 border border-gray-200">
-        <button onClick={() => router.push(`diary/${id}`)}>
-          <h1>{diary.title}</h1>
-          <div>{formattedDate}</div>
-        </button>
-      </div>
+      <button
+        className="size-60 p-3"
+        type="button"
+        onClick={() => router.push(`diary/${id}`)}
+      >
+        <h2 className="overflow-hidden text-ellipsis">{diary.title}</h2>
+        <div>{formattedDate}</div>
+      </button>
     </>
   );
 }

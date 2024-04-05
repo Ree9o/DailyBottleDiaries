@@ -1,13 +1,13 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 import LabeledCheckbox from "./LabeledCheckbox";
 
 export default {
   title: "Molecules/LabeledCheckbox",
   component: LabeledCheckbox,
-} as ComponentMeta<typeof LabeledCheckbox>;
+} as Meta<typeof LabeledCheckbox>;
 
-const Template: ComponentStory<typeof LabeledCheckbox> = (args) => (
+const Template: StoryFn<typeof LabeledCheckbox> = (args) => (
   <LabeledCheckbox {...args} />
 );
 

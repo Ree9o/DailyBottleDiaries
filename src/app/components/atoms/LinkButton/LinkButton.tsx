@@ -11,7 +11,7 @@ export default function LinkButton({ path, className, children }: Props) {
   return (
     <Link href={path}>
       <button
-        className={`w-32 bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ${className}`}
+        className={`w-32 rounded bg-slate-200 px-4 py-2 font-bold text-black hover:bg-slate-300 ${className}`}
       >
         {children}
       </button>

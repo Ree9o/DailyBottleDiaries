@@ -15,18 +15,18 @@ const config: StorybookConfig = {
       builder: {
         useSWC: true, // Enables SWC support
       },
-    }
+    },
   },
   docs: {
     autodocs: "tag",
   },
   webpackFinal: async (config) => {
-    if (!config.resolve) config.resolve = {};
-    if (!config.resolve.modules) config.resolve.modules = [];
-    config.resolve.modules = [
-      ...config.resolve.modules,
-      path.resolve(__dirname, "../src"),
-    ];
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "@": path.resolve(__dirname, "../src"),
+      };
+    }
     return config;
   },
 };

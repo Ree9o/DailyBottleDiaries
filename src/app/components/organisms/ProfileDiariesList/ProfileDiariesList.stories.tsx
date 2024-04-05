@@ -1,4 +1,3 @@
-// ProfileDiariesList.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
 import ProfileDiariesList from "./ProfileDiariesList";
 

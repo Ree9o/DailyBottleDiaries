@@ -22,7 +22,10 @@ export default function CreateDiaryPage({ userid }: { userid: string }) {
   };
   return (
     <>
-      <form action={handleSubmit} className="letter size-9/12 ">
+      <form
+        action={handleSubmit}
+        className="letter m-auto size-11/12 md:size-9/12"
+      >
         <LabeledInput
           id="title"
           label="タイトル"

@@ -2,7 +2,7 @@ import React from "react";
 import getDiaries from "../../services/getDialies";
 import DiaryCard from "../../components/organisms/DiaryCard/DairyCard";
 import { notFound } from "next/navigation";
-import { getServerSession } from "../../api/auth/[...nextauth]/route";
+import { getServerSession } from "@/src/lib/auth";
 interface DiaryPageProps {
   params: {
     id: string;
@@ -20,9 +20,17 @@ export default async function Page({ params }: DiaryPageProps) {
   return (
     <div>
       {session && session?.user?.id === diary.userId ? (
-        <DiaryCard diaryData={diary} name={diary.user.name} isCreateUser={true} />
+        <DiaryCard
+          diaryData={diary}
+          name={diary.user.name}
+          isCreateUser={true}
+        />
       ) : (
-        <DiaryCard diaryData={diary} name={diary.user.name} isCreateUser={false} />
+        <DiaryCard
+          diaryData={diary}
+          name={diary.user.name}
+          isCreateUser={false}
+        />
       )}
     </div>
   );

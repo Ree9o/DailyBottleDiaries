@@ -24,8 +24,12 @@ export default function DiaryContaienerItem({ diary }: DiaryGridsProps) {
   });
   return (
     <>
-      <button className="size-60" type="button" onClick={() => router.push(`diary/${id}`)}>
-        <h1>{diary.title}</h1>
+      <button
+        className="size-60 p-3"
+        type="button"
+        onClick={() => router.push(`diary/${id}`)}
+      >
+        <h2 className="overflow-hidden text-ellipsis">{diary.title}</h2>
         <div>{formattedDate}</div>
       </button>
     </>

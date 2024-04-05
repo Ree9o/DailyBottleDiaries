@@ -1,6 +1,6 @@
 import React from "react";
 import getUserDiaries from "../../services/getUserDiaries";
-import { getServerSession } from "../../api/auth/[...nextauth]/route";
+import { getServerSession } from "@/src/lib/auth";
 import { notFound } from "next/navigation";
 import DiaryCard from "../../components/organisms/DiaryCard/DairyCard";
 
@@ -25,6 +25,10 @@ export default async function Page({ params }: Props) {
   return session.user?.id === diary.userId ? (
     <DiaryCard diaryData={diary} name={session.user.name} isCreateUser={true} />
   ) : (
-    <DiaryCard diaryData={diary} name={session.user.name} isCreateUser={false} />
+    <DiaryCard
+      diaryData={diary}
+      name={session.user.name}
+      isCreateUser={false}
+    />
   );
 }

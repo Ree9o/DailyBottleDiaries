@@ -1,6 +1,6 @@
 import React from "react";
 import CreateDiaryPage from "../../components/organisms/CreateDiaryPage/CreateDiaryPage";
-import { getServerSession } from "../../api/auth/[...nextauth]/route";
+import { getServerSession } from "@/src/lib/auth";
 import { notFound } from "next/navigation";
 
 export default async function Page() {

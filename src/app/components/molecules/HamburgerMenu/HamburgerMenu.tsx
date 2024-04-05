@@ -6,7 +6,11 @@ import LinkButton from "../../atoms/LinkButton/LinkButton";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Session } from "next-auth";
 
-export default function HamburgerMenu({ session }: { session: Session | null }) {
+export default function HamburgerMenu({
+  session,
+}: {
+  session: Session | null;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -15,17 +19,20 @@ export default function HamburgerMenu({ session }: { session: Session | null }) 
 
   return (
     <>
-      <div className="fixed top-0 left-0 p-4 z-50 bg-black">
+      <div className="fixed left-0 top-0 z-50 bg-black p-4">
         <button className="text-white focus:outline-none" onClick={toggleMenu}>
           {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </div>
       <aside
-        className={`fixed top-0 left-0 h-screen w-64 bg-slate-400 transition-transform duration-300 ease-in-out transform ${
+        className={`fixed left-0 top-0 z-10 h-screen w-64 transform bg-slate-400 transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <nav className="flex flex-col gap-5 items-center pt-20">
+        <nav
+          className="flex flex-col items-center gap-5 pt-20"
+          onClick={toggleMenu}
+        >
           <div id="top">
             <LinkButton path="/">トップ</LinkButton>
           </div>

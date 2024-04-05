@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NextAuthProvider from "../providers/NextAuth";
 import Menu from "./components/organisms/Menu/Menu";
-import { getServerSession } from "./api/auth/[...nextauth]/route";;
+import { getServerSession } from "../lib/auth";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,16 +15,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const session = await getServerSession();
-  console.log(session)
   return (
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>
-          <div  className="grid grid-cols-[0.1fr_1fr] grid-rows-1">
+          <div className="grid h-screen grid-cols-[0.1fr_1fr] grid-rows-1 items-center">
             <Menu session={session} />
-          {children}
+            {children}
           </div>
         </NextAuthProvider>
       </body>

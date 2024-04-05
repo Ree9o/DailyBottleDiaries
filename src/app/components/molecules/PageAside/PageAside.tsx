@@ -3,11 +3,15 @@ import AuthButton from "../../atoms/AuthButton/AuthButton";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
 import type { Session } from "next-auth";
 
-export default async function PageAside({ session }: { session: Session | null }) {
+export default async function PageAside({
+  session,
+}: {
+  session: Session | null;
+}) {
   return (
     <>
-      <aside className="bg-gray-500 h-screen">
-        <nav className="flex flex-col gap-5 items-center pt-5">
+      <aside className="h-screen bg-gray-500">
+        <nav className="flex flex-col items-center gap-5 pt-5">
           <div id="top">
             <LinkButton path="/">トップ</LinkButton>
           </div>
